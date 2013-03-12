@@ -1,5 +1,11 @@
 #!/bin/bash
 function merge() {
+    check_for_tiff=`ls -1 /home/scann/scans/ | grep tiff | wc -l`
+
+    if [[ $check_for_tiff eq 0 ]]; then
+        return
+    fi
+
     files_to_merge=`ls -tr /home/scann/scans/*.tiff`
 
     merge_output_file="/home/scann/scans/merge_scan_`date +%Y-%m-%d-%H-%M-%S`.pdf"
