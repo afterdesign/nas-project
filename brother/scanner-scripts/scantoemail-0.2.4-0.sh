@@ -17,6 +17,6 @@ else
 fi
 
 . /opt/brother/scanner/brscan-skey/script/merge_files.sh
-merge;
+merge > /dev/null 2>/dev/null;
 
 scanimage --device-name "$device" --resolution $resolution --format=tiff > $output_file_tiff  2>/dev/null;
