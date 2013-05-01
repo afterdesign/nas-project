@@ -53,6 +53,16 @@ For brscan3 Users:
 ATTRS{idVendor}=="04f9", ENV{libsane_matched}="yes"
 ```
 
+#### Update cfg
+To use ```bash``` instead of ```sh``` edit ```/etc/opt/brother/scanner/brscan-skey/brscan-skey-0.2.4-0.cfg``` and update:
+
+```
+IMAGE="bash  /opt/brother/scanner/brscan-skey/script/scantoimage-0.2.4-0.sh"
+OCR="bash  /opt/brother/scanner/brscan-skey/script/scantoocr-0.2.4-0.sh"
+EMAIL="bash  /opt/brother/scanner/brscan-skey/script/scantoemail-0.2.4-0.sh"
+FILE="bash  /opt/brother/scanner/brscan-skey/script/scantofile-0.2.4-0.sh"
+```
+
 ### Modes
 
 #### Scan to image
