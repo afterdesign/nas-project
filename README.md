@@ -1,10 +1,13 @@
 # Project NAS-BOX
 
-So I wanted a simple NAS. And I was one step before buying "all-in-one" solution from Synology (or smth similar). But the price was quite high for what I wanted to do with it.
+So I wanted a simple NAS. And I was one step before buying "all-in-one" solution from Synology (or smth similar). 
+But the price was quite high for what I wanted to do with it.
 
-About 500€ to be exact. Well quick google about parts and there it was. I can do the same (or even better) with half the price. So here it is.
+About 500€ to be exact. Well quick google about parts and there it was. I can do the same (or even better) 
+with half the price. So here it is.
 
-First tests are saying that with sleeping HDDs my NAS is using about 26-28W of energy. On start it's using about 70W and during all HDDs not sleeping 45-50W.
+First tests are saying that with sleeping HDDs my NAS is using about 26-28W of energy. On start it's using about 
+70W and during all HDDs not sleeping 45-50W.
 I think it's quite good result but I would like to test it more with better hardware to measure "hunger for power".
 
 ## TODO
@@ -82,7 +85,8 @@ I'm using this If I scanned multiple pages document and next document is single 
 
 #### Scan to e-mail
 
-I'm using this when I scanned multiple pages document (and now it's time to convert it to pdf) and I'm going to scan another multipage document.
+I'm using this when I scanned multiple pages document (and now it's time to convert it to pdf) 
+and I'm going to scan another multipage document.
 
 1. search for *.tiff files in ```$SCAN_PATH```, convert them to PDF and merge.
 2. scan current document to tiff (no convertion to pdf)
@@ -90,14 +94,18 @@ I'm using this when I scanned multiple pages document (and now it's time to conv
 #### Scan to ocr
 
 This one is new. Just plain merge of multiple pages document.
+This task may hang a minute before you can scan more with hardware button, use cancel and stop on 
+printer/scanner to stop after merging.
 
 1. search for *.tiff files in ```$SCAN_PATH```, convert them to PDF and merge.
-2. no scanning (this task may hang a minute before you can scan more with hardware button, use cancel and stop)
+2. no scanning 
 
 
 ## Sleeping disks
 
-In directory ```laptop-mode-tools``` you can find my config for laptop-mode. With this settings all of my HDDs are sleeping after few minutes and they are spinning up when neede (watching a movie, scanning or making backup).
+In directory ```laptop-mode-tools``` you can find my config for laptop-mode. With this settings all of 
+my HDDs are sleeping after few minutes and they are spinning up when neede (watching a movie, scanning 
+or making backup).
 
 I tried to set up this using trial and error.
 

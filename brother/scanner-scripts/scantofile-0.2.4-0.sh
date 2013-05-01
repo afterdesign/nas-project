@@ -8,7 +8,6 @@ set +o noclobber
 #
 #       100,200,300,400,600
 #
-resolution=300;
 device=$1;
 
 if [ "`which usleep  2>/dev/null `" != '' ];then
