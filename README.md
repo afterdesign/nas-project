@@ -49,11 +49,17 @@ For brscan3 Users:
 ```
 
 #### Update udev
-[Brother manual](http://welcome.solutions.brother.com/bsc/public_s/id/linux/en/instruction_scn1c.html#u9.10)
+[Brother manual](http://welcome.solutions.brother.com/bsc/public_s/id/linux/en/instruction_scn1c.html#u13.04)
+
+Now for Ubuntu 10.10 and above there is .deb with udev file/rules.
+But still that didn't work for me out of the box.
+All I needed to do is unhash lines in ```/etc/udev/rules.d/40-brother-libsane-type1.rules```:
 
 ```
-# Brother scanners
-ATTRS{idVendor}=="04f9", ENV{libsane_matched}="yes"
+MODE="0666"
+GROUP="scanner"
+ENV{libsane_matched}="yes"
+SYMLINK+="scanner-%k"
 ```
 
 #### Update cfg
