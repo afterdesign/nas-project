@@ -1,0 +1,7 @@
+# The line below sets some DEFAULT, starting with Netatalk 2.1.
+:DEFAULT: options:upriv,usedots
+
+# By default all users have access to their home directories.
+{{ backup_mount }} "Backup" options:usedots,upriv,tm
+
+# End of File

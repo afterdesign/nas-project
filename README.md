@@ -104,7 +104,7 @@ printer/scanner to stop after merging.
 ## Sleeping disks
 
 In directory ```laptop-mode-tools``` you can find my config for laptop-mode. With this settings all of 
-my HDDs are sleeping after few minutes and they are spinning up when neede (watching a movie, scanning 
+my HDDs are sleeping after few minutes and they are spinning up when needed (watching a movie, scanning 
 or making backup).
 
 I tried to set up this using trial and error.
