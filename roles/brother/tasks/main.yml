@@ -1,0 +1,43 @@
+---
+- name: scanner group exists
+  group: name=scanner
+
+- name: user is added to scanner group
+  user: name=afterdesign groups=scanner
+
+- name: Install packages
+  apt: name={{ item }} state=installed
+  with_items:
+    - libtiff-tools
+    - poppler-utils
+    - sane-utils
+
+- name: wget brscan3
+  get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brscan3-0.2.11-5.amd64.deb dest=/root/brscan3-0.2.11-5.amd64.deb mode=0777
+- name: wget scan-key-tool
+  get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brscan-skey-0.2.4-1.amd64.deb dest=/root/brscan-skey-0.2.4-1.amd64.deb mode=0777
+
+- name: install brscan3
+  command: dpkg -i /root/brscan3-0.2.11-5.amd64.deb creates=/usr/bin/brsaneconfig3
+- name: install scan-key-tool
+  command: dpkg -i /root/brscan-skey-0.2.4-1.amd64.deb creates=/usr/bin/brscan-skey
+
+- name: copy from /usr/lib64/ to /usr/lib/
+  command: rsync -r /usr/lib64/ /usr/lib/
+
+- name: change sh to bash in /etc/opt/brother/scanner/brscan-skey/brscan-skey-0.2.4-0.cfg
+  command: sed -i 's/"sh/"bash/g' /etc/opt/brother/scanner/brscan-skey/brscan-skey-0.2.4-0.cfg
+
+- name: chown /opt/
+  command: chown -R afterdesign:afterdesign /opt/
+
+- name: clone repo with brother scripts
+  git: repo=https://github.com/afterdesign/nas-project.git dest=/root/nas-project/
+
+- name: copy scripts for scanning
+  command: rsync -r /root/nas-project/brother/scanner-scripts/ /opt/brother/scanner/brscan-skey/script/ creates=/opt/brother/scanner/brscan-skey/script/merge_files.sh
+
+- name: copy udev startscript
+  copy: src=40-brother-scanner.rules dest=/etc/udev/rules.d/40-brother-scanner.rules
+  notify:
+    - restart udev

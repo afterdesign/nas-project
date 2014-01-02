@@ -44,3 +44,7 @@ merge() {
         done
     fi
 }
+
+reown() {
+    /bin/chown -R afterdesign:afterdesign $SCAN_PATH/*;
+}

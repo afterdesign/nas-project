@@ -1,73 +1,19 @@
 ---
-- hosts: 10.0.0.13
+- hosts: 10.0.1.7
   connection: ssh
   user: afterdesign
   sudo: yes
-  vars:
-     backup_mount: /media/backup
 
-  tasks:
+  pre_tasks:
     - name: Upgrade packages
       apt: upgrade=dist
-    - name: Install htop
-      apt: pkg=htop state=latest
-    
-    - name: create {{ backup_mount }} directory
-      file: dest={{ backup_mount }} mode=777 owner=afterdesign group=afterdesign state=directory
-    - name: mount backup drive
-      mount: name={{ backup_mount }} src=/dev/sdb1 fstype=ext4 opts=defaults,user state=mounted
+    - name: Install packages
+      apt: name={{ item }} state=installed
+      with_items:
+        - htop
+        - git
 
-    - name: chown mounted directory
-      command: chown afterdesign:afterdesign {{ backup_mount }}
-    - name: install netatalk
-      apt: pkg=netatalk state=latest
-    - name: setup netatalk
-      template: src=netatalk/afpd.conf dest=/etc/netatalk/afpd.conf backup=yes
-      template: src=netatalk/AppleVolumes.j2 dest=/etc/netatalk/AppleVolumes.default backup=yes
-      notify:
-        - restart netatalk
-
-    - name: install laptop-mode-tools
-      apt: pkg=laptop-mode-tools state=latest
-    - name: setup laptop-mode-tools
-      template: src=laptop-mode-tools/laptop-mode.conf dest=/etc/laptop-mode/laptop-mode.conf backup=yes
-      notify: restart laptop-tools
-
-    - name: install libtiff-tools
-      apt: pkg=libtiff-tools state=latest
-    - name: install poppler-utils
-      apt: pkg=poppler-utils state=latest
-    - name: install sane-utils
-      apt: pkg=sane-utils state=latest
-    - name: wget brscan3
-      get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brscan3-0.2.11-5.amd64.deb dest=/root/brscan3-0.2.11-5.amd64.deb mode=0777
-    - name: wget scan-key-tool
-      get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brscan-skey-0.2.4-1.amd64.deb dest=/root/brscan-skey-0.2.4-1.amd64.deb mode=0777
-    - name: get udev rules
-      get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brother-udev-rule-type1-1.0.0-1.all.deb dest=/root/brother-udev-rule-type1-1.0.0-1.all.deb mode=0777
-    - name: install brscan3
-      command: dpkg -i /root/brscan3-0.2.11-5.amd64.deb
-    - name: install scan-key-tool
-      command: dpkg -i /root/brscan-skey-0.2.4-1.amd64.deb
-    - name: install udev rules for brother
-      command: dpkg -i /root/brother-udev-rule-type1-1.0.0-1.all.deb
-    - name: copy from /usr/lib64/ to /usr/lib/
-      command: rsync -r /usr/lib64/ /usr/lib/
-    - name: hash SYSFS in /etc/udev/rules.d/40-brother-libsane-type1.rules
-      command: sed -i 's/SYSFS/#SYSFS/g' /etc/udev/rules.d/40-brother-libsane-type1.rules
-    - name: change sh to bash in /etc/opt/brother/scanner/brscan-skey/brscan-skey-0.2.4-0.cfg
-      command: sed -i 's/sh/bash/g' /etc/opt/brother/scanner/brscan-skey/brscan-skey-0.2.4-0.cfg
-    - name: chown /opt/
-      command: chown -R afterdesign:afterdesign /opt/
-    - name: install git
-      apt: pkg=git state=latest
-    - name: clone repo with brother scripts
-      git: repo=https://github.com/afterdesign/nas-project.git dest=/root/nas-project/
-    - name: copy scripts for scanning
-      command: rsync -r /root/nas-project/brother/scanner-scripts/ /opt/brother/scanner/brscan-skey/script/
-
-  handlers:
-    - name: restart netatalk
-      service: name=netatalk state=restarted
-    - name: restart laptop-tools
-      service: name=laptop-mode state=restarted
+  roles:
+    - brother
+    - mounting
+    - energy-saving

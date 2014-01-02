@@ -18,3 +18,4 @@ fi
 
 . /opt/brother/scanner/brscan-skey/script/merge_files.sh
 merge > /dev/null 2>/dev/null;
+reown;

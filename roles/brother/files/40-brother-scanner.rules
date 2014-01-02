@@ -1,0 +1,11 @@
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="04f9", GOTO="start_brother_scanner"
+GOTO="nothing_to_do"
+LABEL="start_brother_scanner"
+
+MODE="0666"
+GROUP="scanner"
+ENV{libsane_matched}="yes"
+SYMLINK+="scanner-%k"
+RUN+="/usr/bin/brscan-skey"
+
+LABEL="nothing_to_do"

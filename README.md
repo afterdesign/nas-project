@@ -1,12 +1,12 @@
 # Project NAS-BOX
 
-So I wanted a simple NAS. And I was one step before buying "all-in-one" solution from Synology (or smth similar). 
+So I wanted a simple NAS. And I was one step before buying "all-in-one" solution from Synology (or smth similar).
 But the price was quite high for what I wanted to do with it.
 
-About 500€ to be exact. Well quick google about parts and there it was. I can do the same (or even better) 
+About 500€ to be exact. Well quick google about parts and there it was. I can do the same (or even better)
 with half the price. So here it is.
 
-First tests are saying that with sleeping HDDs my NAS is using about 26-28W of energy. On start it's using about 
+First tests are saying that with sleeping HDDs my NAS is using about 26-28W of energy. On start it's using about
 70W and during all HDDs not sleeping 45-50W.
 I think it's quite good result but I would like to test it more with better hardware to measure "hunger for power".
 
@@ -49,18 +49,9 @@ For brscan3 Users:
 ```
 
 #### Update udev
-[Brother manual](http://welcome.solutions.brother.com/bsc/public_s/id/linux/en/instruction_scn1c.html#u13.04)
+I've created completly new udev rules.
 
-Now for Ubuntu 10.10 and above there is .deb with udev file/rules.
-But still that didn't work for me out of the box.
-All I needed to do is unhash lines in ```/etc/udev/rules.d/40-brother-libsane-type1.rules```:
-
-```
-MODE="0666"
-GROUP="scanner"
-ENV{libsane_matched}="yes"
-SYMLINK+="scanner-%k"
-```
+Now it's starting ```brscan-skey``` tool right after you turn on/plug in scanner.
 
 #### Update cfg
 To use ```bash``` instead of ```sh``` edit ```/etc/opt/brother/scanner/brscan-skey/brscan-skey-0.2.4-0.cfg``` and update:
@@ -82,7 +73,7 @@ I'm using this to scan multiple pages.
 
 #### Scan to file
 
-I'm using this If I scanned multiple pages document and next document is single page. Also It can be used as single 
+I'm using this If I scanned multiple pages document and next document is single page. Also It can be used as single
 
 1. search for *.tiff files in ```$SCAN_PATH```, convert them to PDF and merge to one pdf, delete all tiffs
 2. scan current document to tiff
@@ -91,7 +82,7 @@ I'm using this If I scanned multiple pages document and next document is single 
 
 #### Scan to e-mail
 
-I'm using this when I scanned multiple pages document (and now it's time to convert it to pdf) 
+I'm using this when I scanned multiple pages document (and now it's time to convert it to pdf)
 and I'm going to scan another multipage document.
 
 1. search for *.tiff files in ```$SCAN_PATH```, convert them to PDF and merge.
@@ -100,17 +91,17 @@ and I'm going to scan another multipage document.
 #### Scan to ocr
 
 This one is new. Just plain merge of multiple pages document.
-This task may hang a minute before you can scan more with hardware button, use cancel and stop on 
+This task may hang a minute before you can scan more with hardware button, use cancel and stop on
 printer/scanner to stop after merging.
 
 1. search for *.tiff files in ```$SCAN_PATH```, convert them to PDF and merge.
-2. no scanning 
+2. no scanning
 
 
 ## Sleeping disks
 
-In directory ```laptop-mode-tools``` you can find my config for laptop-mode. With this settings all of 
-my HDDs are sleeping after few minutes and they are spinning up when needed (watching a movie, scanning 
+In directory ```laptop-mode-tools``` you can find my config for laptop-mode. With this settings all of
+my HDDs are sleeping after few minutes and they are spinning up when needed (watching a movie, scanning
 or making backup).
 
 I tried to set up this using trial and error.

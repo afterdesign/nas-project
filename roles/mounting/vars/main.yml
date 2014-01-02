@@ -1,0 +1,3 @@
+---
+backup_mount: /media/backup
+scans_directory: /home/afterdesign/scanning/scans/

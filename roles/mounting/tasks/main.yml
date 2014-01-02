@@ -1,0 +1,19 @@
+---
+- name: create {{ backup_mount }} directory
+  file: dest={{ backup_mount }} mode=777 owner=afterdesign group=afterdesign state=directory
+
+- name: mount backup drive
+  mount: name={{ backup_mount }} src=/dev/sdb1 fstype=ext4 opts=defaults,user state=mounted
+
+- name: chown mounted directory
+  command: chown afterdesign:afterdesign {{ backup_mount }}
+
+- name: install netatalk
+  apt: pkg=netatalk state=latest
+
+- name: copy config afpd
+  copy: src=afpd.conf dest=/etc/netatalk/afpd.conf
+- name: copy config AppleVolumes
+  template: src=AppleVolumes.j2 dest=/etc/netatalk/AppleVolumes.default
+  notify:
+    - restart netatalk
