@@ -12,6 +12,13 @@
       with_items:
         - htop
         - git
+    - name: Remove packages
+      apt: name={{ item }} state=absent purge=yes
+      with_items:
+        - update-notifier-common
+        - landscape-common
+        - update-manager-core
+        - ubuntu-release-upgrader-core
 
   roles:
     - brother
