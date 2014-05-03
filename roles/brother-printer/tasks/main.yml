@@ -1,0 +1,21 @@
+---
+- name: Install packages
+  apt: name={{ item }} state=installed
+  with_items:
+    - cups
+    - lib32stdc++6
+    - libp11-kit-gnome-keyring
+
+- name: wget lpr printer driver
+  get_url: url=http://download.brother.com/welcome/dlf005511/brdcp7030lpr-2.0.2-1.i386.deb dest=brdcp7030lpr-2.0.2-1.i386.deb mode=0777
+
+- name: install lpr printer driver
+  command: dpkg -i /root/brdcp7030lpr-2.0.2-1.i386.deb creates=/usr/bin/brprintconfiglpr2
+
+- name: wget cups printer driver
+  get_url: url=http://download.brother.com/welcome/dlf005513/cupswrapperDCP7030-2.0.2-1.i386.deb dest=/root/cupswrapperDCP7030-2.0.2-1.i386.deb mode=0777
+
+- name: install cups printer driver
+  command: dpkg -i /root/cupswrapperDCP7030-2.0.2-1.i386.deb creates=/usr/local/Brother/cupswrapper/brcupsconfig3
+  notify:
+    - restart cups

@@ -1,7 +1,7 @@
 ---
 - hosts: 10.0.1.7
   connection: ssh
-  user: afterdesign
+  remote_user: afterdesign
   sudo: yes
 
   pre_tasks:
@@ -21,6 +21,7 @@
         - ubuntu-release-upgrader-core
 
   roles:
-    - brother
+    - brother-scanner
+    - brother-printer
     - mounting
     - energy-saving

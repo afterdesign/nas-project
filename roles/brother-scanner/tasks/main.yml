@@ -13,9 +13,9 @@
     - sane-utils
 
 - name: wget brscan3
-  get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brscan3-0.2.11-5.amd64.deb dest=/root/brscan3-0.2.11-5.amd64.deb mode=0777
+  get_url: url=http://download.brother.com/welcome/dlf006642/brscan3-0.2.11-5.amd64.deb dest=/root/brscan3-0.2.11-5.amd64.deb mode=0777
 - name: wget scan-key-tool
-  get_url: url=http://www.brother.com/pub/bsc/linux/dlf/brscan-skey-0.2.4-1.amd64.deb dest=/root/brscan-skey-0.2.4-1.amd64.deb mode=0777
+  get_url: url=http://download.brother.com/welcome/dlf006652/brscan-skey-0.2.4-1.amd64.deb dest=/root/brscan-skey-0.2.4-1.amd64.deb mode=0777
 
 - name: install brscan3
   command: dpkg -i /root/brscan3-0.2.11-5.amd64.deb creates=/usr/bin/brsaneconfig3
