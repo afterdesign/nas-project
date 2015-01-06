@@ -1,7 +1,6 @@
 ---
 - hosts: 10.0.1.7
   connection: ssh
-  remote_user: afterdesign
   sudo: yes
 
   pre_tasks:
