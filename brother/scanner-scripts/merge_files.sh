@@ -6,6 +6,7 @@ MERGE_PATH=$MAIN_PATH"/merge"
 
 output_file=$SCAN_PATH"/scan_"`date +%Y-%m-%d-%H-%M-%S`;
 output_file_tiff=$output_file".tiff";
+output_file_jpg=$output_file".jpg";
 output_file_pdf=$output_file".pdf";
 
 resolution=300;

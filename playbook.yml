@@ -7,10 +7,11 @@
     - name: Upgrade packages
       apt: upgrade=dist
     - name: Install packages
-      apt: name={{ item }} state=installed
+      apt: name={{ item }} state=latest
       with_items:
         - htop
         - git
+        - imagemagick
     - name: Remove packages
       apt: name={{ item }} state=absent purge=yes
       with_items:
