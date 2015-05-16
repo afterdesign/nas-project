@@ -11,9 +11,7 @@ First tests are saying that with sleeping HDDs my NAS is using about 26-28W of e
 I think it's quite good result but I would like to test it more with better hardware to measure "hunger for power".
 
 ## TODO
-1. XBMC - [awesome post about xbmc with amd platform](http://forum.xbmc.org/showthread.php?tid=116996)
-2. Printer (quite easy task)
-3. iTunes music server (cause I have tons of ripped CDs and only 256GB SSD in my laptop)
+1. iTunes music server (cause I have tons of ripped CDs and only 256GB SSD in my laptop)
 
 ## Hardware:
 + [Fractal Design 304 case](http://www.fractal-design.com/?view=product&category=2&prod=94) - 6 HDD small chassie. Hard to manage cables but it looks nice and it's working.
