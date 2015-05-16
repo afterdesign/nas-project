@@ -1,5 +1,5 @@
 ---
-- hosts: 10.0.1.7
+- hosts: 172.16.0.15
   connection: ssh
   sudo: yes
 

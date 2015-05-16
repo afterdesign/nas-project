@@ -18,6 +18,5 @@ fi
 
 . /opt/brother/scanner/brscan-skey/script/merge_files.sh
 
-scanimage --device-name "$device" --resolution $resolution --format=tiff > $output_file_tiff  2>/dev/null;
-convert $output_file_tiff -quality 70 $output_file_jpg;
+scan_to_image
 reown;

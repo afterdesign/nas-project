@@ -17,11 +17,7 @@ else
 fi
 
 . /opt/brother/scanner/brscan-skey/script/merge_files.sh
-merge > /dev/null 2>/dev/null;
 
-scanimage --device-name "$device" --resolution $resolution --format=tiff > $output_file_tiff  2>/dev/null;
-convert $output_file_jpg $output_file_pdf
-# tiff2pdf -z $output_file_tiff > $output_file_pdf;
-rm $output_file_tiff;
-rm $output_file_jpeg;
+scan_to_image
+merge
 reown;
