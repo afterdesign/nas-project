@@ -1,0 +1,11 @@
+---
+- apt: name={{ item }} state=installed
+  with_items:
+    - cups
+
+# enable web interface on port 631 where you can add brother dcp7030
+- shell: cupsctl -U afterdesign --remote-any
+- shell: cupsctl -U afterdesign --share-printers
+- shell: cupsctl -U afterdesign --user-cancel-any
+
+- service: name=cups state=restarted
