@@ -1,27 +1,25 @@
 ---
 - hosts: 172.16.0.15
   connection: ssh
-  sudo: yes
 
   pre_tasks:
-    - name: Upgrade packages
-      apt: upgrade=dist
-    - name: Install packages
-      apt: name={{ item }} state=latest
+    - apt: upgrade=dist
+    - apt: name={{ item }} state=latest
       with_items:
         - htop
         - git
-        - imagemagick
-    - name: Remove packages
-      apt: name={{ item }} state=absent purge=yes
-      with_items:
-        - update-notifier-common
-        - landscape-common
-        - update-manager-core
-        - ubuntu-release-upgrader-core
+        - sudo
+        - bash-completion
+        - git-completion
+        - hdparm
+    - user: name=afterdesign groups=sudo append=yes
 
   roles:
-    - brother-scanner
-    - brother-printer
-    - mounting
-    - energy-saving
+    - systemd
+    - cups
+    # - backup
+    # - plex
+    # - brother-scanner
+    # - brother-printer
+    # - mounting
+    # - energy-saving
