@@ -1,0 +1,9 @@
+---
+- shell: timedatectl set-timezone CET
+- shell: timedatectl set-ntp 1
+
+- apt: name={{ item }} state=latest
+  with_items:
+    - libpam-systemd
+
+- file: path=/var/log/journal state=directory group=systemd-journal mode="g+rwx"

@@ -1,7 +1,7 @@
 ---
-- name: install laptop-mode-tools
-  apt: pkg=laptop-mode-tools state=latest
+- apt: pkg=laptop-mode-tools state=latest
 
-- name: setup laptop-mode-tools
-  copy: src=laptop-mode.conf dest=/etc/laptop-mode/laptop-mode.conf backup=yes
-  notify: restart laptop-tools
+- shell: sed -i 's/ENABLE_LAPTOP_MODE_ON_AC=0/ENABLE_LAPTOP_MODE_ON_AC=1/g' /etc/laptop-mode/laptop-mode.conf
+- shell: sed -i 's/CONTROL_HD_POWERMGMT="auto"/CONTROL_HD_POWERMGMT=1/g' /etc/laptop-mode/laptop-mode.conf
+
+- service: name=laptop-mode state=restarted
