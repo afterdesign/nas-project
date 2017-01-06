@@ -1,0 +1,30 @@
+---
+  - name: Create {{ backup_mount }} directory
+    file:
+      dest: "{{ backup_mount }}"
+      mode: 777
+      owner: afterdesign
+      group: afterdesign
+      state: directory
+
+  - name: Create logical volume for backups
+    lvol:
+      vg: "nas-vg"
+      lv: backup
+      size: 500G
+
+  - name: Create filesystem for backup volume
+    filesystem:
+      fstype: ext4
+      dev: "/dev/nas-vg/backup"
+
+  - name: Mount backup volume
+    mount:
+      name: "{{ backup_mount }}"
+      src: /dev/nas-vg/backup
+      fstype: ext4
+      state: mounted
+      opts: "noatime passno=2"
+
+  - name: chown mounted directory
+    command: chown afterdesign:afterdesign {{ backup_mount }}

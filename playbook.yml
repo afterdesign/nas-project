@@ -1,6 +1,8 @@
 ---
 - hosts: 172.16.0.15
   connection: ssh
+  vars:
+    backup_mount: /media/backup
 
   pre_tasks:
     - apt: upgrade=dist
@@ -12,14 +14,19 @@
         - bash-completion
         - git-completion
         - hdparm
+        - avahi-daemon
+        - firmware-linux-nonfree
+        - firmware-realtek
+
     - user: name=afterdesign groups=sudo append=yes
 
   roles:
     - systemd
     - cups
     - energy-saving
-    # - backup
+    - brother-scanner
+    - backup
+    - mounting
+
     # - plex
-    # - brother-scanner
-    # - mounting
     # - energy-saving
